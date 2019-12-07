@@ -61,3 +61,5 @@ footer {background-color: #000;color:#fff; padding:20px;}
 @media (max-width: 767px) {
 	.intro-text {display: none;}
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

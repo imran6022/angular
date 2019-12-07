@@ -14,11 +14,38 @@ export class CatagoryServiceService {
 
   constructor(private http: HttpClient) { }
 
-  getCategorys(){
+  getCategorys() {
     return this.http.get<CategoryModel>(this.serverUrl + 'api/adminCategorys').pipe(
       catchError(this.handleError)
     );
   }
+
+  getCategory(id: number) {
+    return this.http.get<CategoryModel>(this.serverUrl + 'api/adminCategory/' + id).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  createCategory(blog) {
+    return this.http.post<any>(this.serverUrl + 'api/createCategory', blog)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  updateCategory(blog, id: number) {
+    return this.http.post<any>(this.serverUrl + 'api/updateCategory/' + id, blog)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  deleteCategory(id: number) {
+    return this.http.delete(this.serverUrl + 'api/deleteCategory/' + id).pipe(
+      catchError(this.handleError)
+    );
+  }
+
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

@@ -15,6 +15,9 @@ import { AdminModule } from './admin/admin.module';
 import { AuthModule } from './auth/auth.module';
 
 import { httpInterceptorProviders } from './http-interceptors/index';
+import { CategoriesFormComponent } from './manage-categories/categories-form/categories-form.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,9 @@ import { httpInterceptorProviders } from './http-interceptors/index';
     HeaderComponent,
     FooterComponent,
     BannerComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    CategoriesFormComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +36,8 @@ import { httpInterceptorProviders } from './http-interceptors/index';
     CmspageModule,
     AdminModule,
     AuthModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [Title, httpInterceptorProviders],
   bootstrap: [AppComponent]

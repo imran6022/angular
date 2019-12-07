@@ -113,6 +113,7 @@ class Api_model extends CI_Model
 		$this->db->delete('blogs');
 	}
 
+// category
 
 	function get_admin_categorys(){ 
 		$this->db->select('*');
@@ -120,5 +121,26 @@ class Api_model extends CI_Model
 		$this->db->order_by('id', 'desc');
 		$query = $this->db->get();
 		return $query->result();
+	}
+
+	function insertCetegory($CategoryData){
+		return $this->db->insert('categories', $CategoryData);
+	}
+
+	function get_admin_category($id){
+		$this->db->select('*');
+		$this->db->where('id', $id);
+		$this->db->from('categories');
+		return $this->db->get()->row();
+	}
+
+	function updateCategory($id, $categoryData){
+		$this->db->where('id', $id);
+		$this->db->update('categories', $categoryData);
+	}
+
+	function deleteCategory($id){
+		$this->db->where('id', $id);
+		$this->db->delete('categories');
 	}
 }

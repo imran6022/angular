@@ -488,6 +488,8 @@ class Api extends CI_Controller {
 		}
 	}
 
+	// category
+
 	function adminCategorys(){
 		header("Access-Control-Allow-Origin: *");
 	    header("Access-Control-Allow-Headers: authorization, Content-Type");
@@ -502,7 +504,7 @@ class Api extends CI_Controller {
 	        foreach($categorys as $category) {
 	            $posts[] = array(
 	                'id' => $category->id,
-	                'category_name' => $category->category_name,
+	                'category_name' => $category->category_name
 	            );
 	        }
 
@@ -512,5 +514,113 @@ class Api extends CI_Controller {
 	            ->set_output(json_encode($posts)); 
 	    }
 	}
+
+	public function adminCategory($id)
+	{
+		header("Access-Control-Allow-Origin: *");
+		header("Access-Control-Allow-Headers: authorization, Content-Type");
+
+		$token = $this->input->get_request_header('Authorization');
+
+		$isValidToken = $this->api_model->checkToken($token);
+
+		if($isValidToken) {
+
+			$category = $this->api_model->get_admin_category($id);
+
+			$post = array(
+				'id' => $category->id,
+				'category_name' => $category->category_name,
+			);
+			
+
+			$this->output
+				->set_status_header(200)
+				->set_content_type('application/json')
+				->set_output(json_encode($post)); 
+		}
+	}
+
+	public function createCategory()
+	{
+		header("Access-Control-Allow-Origin: *");
+		header("Access-Control-Request-Headers: GET,POST,OPTIONS,DELETE,PUT");
+		header("Access-Control-Allow-Headers: authorization, Content-Type");
+
+		$token = $this->input->get_request_header('Authorization');
+
+		$isValidToken = $this->api_model->checkToken($token);
+
+		if($isValidToken) {
+
+			$category_name = $this->input->post('category_name');
+
+	        	$CategoryData = array(
+					'category_name' => $category_name,
+				);
+
+				$id = $this->api_model->insertCetegory($CategoryData);
+
+			$this->output
+				->set_status_header(200)
+				->set_content_type('application/json')
+				->set_output(json_encode($response)); 
+		}
+	}
+
+	public function updateCategory($id)
+	{
+		header("Access-Control-Allow-Origin: *");
+		header("Access-Control-Allow-Headers: authorization, Content-Type");
+		header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+
+		$token = $this->input->get_request_header('Authorization');
+
+		$isValidToken = $this->api_model->checkToken($token);
+
+		if($isValidToken) {
+
+			$category = $this->input->post('category_name');
+
+
+			if( ! $isUploadError) {
+	        	$categoryData = array(
+					'category_name' => $category,
+				);
+
+				$this->api_model->updateCategory($id, $categoryData);
+           	}
+
+			$this->output
+				->set_status_header(200)
+				->set_content_type('application/json')
+				->set_output(json_encode($response)); 
+		}
+	}
+
+	public function deleteCategory($id)
+	{
+		header('Access-Control-Allow-Origin: *');
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+		header("Access-Control-Allow-Headers: authorization, Content-Type");
+
+		$token = $this->input->get_request_header('Authorization');
+
+		$isValidToken = $this->api_model->checkToken($token);
+
+		if($isValidToken) {
+
+			$this->api_model->deleteCategory($id);
+
+			
+
+			$this->output
+				->set_status_header(200)
+				->set_content_type('application/json')
+				->set_output(json_encode($response)); 
+		}
+	}
+
+
 
 }

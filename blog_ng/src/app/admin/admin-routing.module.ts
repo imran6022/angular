@@ -7,6 +7,7 @@ import { ManageBlogsComponent } from './manage-blogs/manage-blogs.component';
 import { ManageCategoriesComponent } from './manage-categories/manage-categories.component';
 import { ManagePagesComponent } from './manage-pages/manage-pages.component';
 import { BlogFormComponent } from './blog-form/blog-form.component';
+import { CategoriesFormComponent } from './categories-form/categories-form.component';
 
 import { AuthGuard } from '../auth/auth.guard';
 
@@ -23,6 +24,8 @@ const routes: Routes = [
         { path: 'blogs/create', component: BlogFormComponent },
         { path: 'blogs/edit/:id', component: BlogFormComponent },
         { path: 'categories', component: ManageCategoriesComponent },
+        { path: 'categories/create', component: CategoriesFormComponent},
+        { path: 'categories/edit/:id', component: CategoriesFormComponent },
         { path: 'pages', component: ManagePagesComponent },
         { path: '', component: AdminDashboardComponent }
       ],

@@ -22,4 +22,16 @@ export class ManageCategoriesComponent implements OnInit {
     );
   }
 
+  onDelete(id: number) {
+    if (confirm('Are you sure want to delete id = ' + id)) {
+      this.categoryService.deleteCategory(+id).subscribe(
+        res => {
+          console.log(res);
+          this.ngOnInit();
+        },
+        error => this.error = error
+      );
+    }
+  }
+
 }

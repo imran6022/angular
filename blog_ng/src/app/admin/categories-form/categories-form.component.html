@@ -1,0 +1,20 @@
+<div class="dash-header">
+    <div class="dash-title">
+        <h3 class="text-center">{{pageTitle}}</h3>
+    </div>
+  </div>
+  <div class="category-form">
+    <form [formGroup]="categoryForm" (ngSubmit)= "onSubmit()">
+      <div class="form-group">
+        <label >Category Name <span class="">*</span> </label>
+        <input type="text" formControlName="category_name" class="form-control" placeholder="Category Name" required>
+        <!-- <div *ngIf="category_name.invalid || category_name.touched" class="error">
+          <p *ngIf="category_name.errors">Category name required</p>
+        </div> -->
+      </div>
+
+      <input type="hidden" formControlName="id">
+      <button type="submit" [disabled]="!categoryForm.valid" class="btn btn-primary">Save</button>
+
+    </form>
+  </div>
